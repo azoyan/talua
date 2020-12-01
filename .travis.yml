@@ -1,5 +1,4 @@
-language: python
-root: false
+language: c
 
 matrix:
   include:
@@ -43,10 +42,12 @@ before_install:
   - pip2 install codecov
   - pip2 install hererocks
   - hererocks lua_install --$LUA -r latest
+  - export PATH=$PATH:$PWD/lua_install/bin # Add directory with all installed binaries to PATH
   - source lua_install/bin/activate
   - luarocks install busted
   - luarocks install cluacov
   - luarocks install luacheck
+  - luarocks install luacov-coveralls
 
 install:
   - luarocks make
@@ -58,3 +59,4 @@ script:
 after_script:
   - luacov src
   - codecov -X gcov
+  - luacov-coveralls --exclude $TRAVIS_BUILD_DIR/lua_install
