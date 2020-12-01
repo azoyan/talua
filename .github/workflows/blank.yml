@@ -47,4 +47,3 @@ jobs:
       - name: After script
         run: |
           luacov src
-          codecov -X gcov
