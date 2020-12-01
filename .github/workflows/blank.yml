@@ -25,13 +25,12 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
+      - name: Install LuaRocks
+        uses: leafo/gh-actions-luarocks@v4.0.0
+
       # Runs a set of commands using the runners shell
       - name: Before Install
         run: |
-          pip2 install codecov
-          pip2 install hererocks
-          hererocks lua_install --$LUA -r latest
-          source lua_install/bin/activate
           luarocks install busted
           luarocks install cluacov
           luarocks install luacheck
