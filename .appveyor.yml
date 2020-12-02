@@ -20,15 +20,15 @@ before_build:
   - luarocks install cluacov
   - luarocks install luautf8
   - luarocks install luasocket
+  - luarocks install luacheck
 
 build_script:
   - luarocks make
 
 test_script:
   - busted -c
-  - luacheck .
-  - luacheck .
+  - luacheck src
 
 after_test:
-  - luacov
+  - luacov src
   - codecov -f luacov.report.out -X gcov
