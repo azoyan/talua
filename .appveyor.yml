@@ -62,7 +62,7 @@ before_build:
 - echo "Installing external deps"
 
 build_script:
-- luarocks make rockspecs/foo-scm-0.rockspec --local
+- luarocks make talua-dev-1.rockspec --local
 
 before_test:
 # install test only deps (if not already installed)
