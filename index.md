@@ -1,37 +1,107 @@
-## Welcome to GitHub Pages
+# talua - Technical Analysys Lua library
+This library provide most popular technical indicators.
 
-You can use the [editor on GitHub](https://github.com/azoyan/talua/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+## Getting started
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Markdown
+## Basic ideas
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+Common to the whole API are the functions `add`, `last`, `series` and `reset`.
 
-```markdown
-Syntax highlighted code block
+### `add(...)` 
+The add function is universal and can take a `number`, several numbers, or a table of numbers as arguments, as well as, in most cases, a candlestick (`Candlestick`), several candlesticks, and a table of candlesticks. 
 
-# Header 1
-## Header 2
-### Header 3
+The function returns the `self`, so you can call it multiple times or call another method of the object. Take a look:
+```Lua
+local SimpleMovingAverage = require "SimpleMovingAverage"
 
-- Bulleted
-- List
+local sma = SimpleMovingAverage(4)
 
-1. Numbered
-2. List
+sma:add(4.0)
+sma:add(5.0)
+sma:add(6.0)
+sma:add(6.0)
 
-**Bold** and _Italic_ and `Code` text
+-- it is same as:
+sma:add(4,0, 5.0, 6.0, 6.0)
+-- or
+sma:add{4,0, 5.0, 6.0, 6.0}
+-- or
+sma:add{{4.0, {5.0, {6.0, {6.0 }}}}}
+-- or
+sma:add(4.0):add(5.0):add(6.0):add(6.0)
+```
+You can combine numbers and Сandlesticks as you like:
+```lua
+local Candlestick = require "Candlestick"
+local candle1 = Candlestick():close(4.0)
+local candle2 = Candlestick():close(4.0)
 
-[Link](url) and ![Image](src)
+sma:add({candle1, candle2}, {7, 1}):add(Candlestick():close(3)):add(4.0):add{5.0, 5.5}
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+### `last()`
+Returns last or in other words actual or current value of indicator series:
+```
+local last = sma:add{4.0, 5.0, 6.0, 6.0, 6.0, 6.0, 2.0}:last() -- 5.0
+```
 
-### Jekyll Themes
+### `series()`
+Returns series of indicator values:
+```lua
+local sma = SimpleMovingAverage(9)
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/azoyan/talua/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+local input = {22.81, 23.09, 22.91, 23.23, 22.83, 23.05, 23.02, 23.29, 23.41, 23.49, 24.60, 24.63, 24.51, 23.73,
+              23.31, 23.53, 23.06, 23.25, 23.12, 22.80, 22.84}
 
-### Support or Contact
+local series = sma:add(input):series() -- 23.07, 23.15, 23.31, 23.51, 23.65, 23.75, 23.78, 23.83, 23.81, 23.79, 23.75, 23.55, 23.35
+```
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+Example:
+```lua
+local RelativeStrengthIndex = require "RelativeStrengthIndex"
+    
+local rsi = RelativeStrengthIndex(14) -- period argument
+
+rsi:add(283.46, 280.69, 285.48, 294.08, 293.90, 299.92, 301.15, 284.45, 294.09, 302.77, 301.97, 306.85,
+        305.02, 301.06, 291.97, 284.18, 286.48, 284.54, 276.82, 284.49, 275.01, 279.07, 277.85, 278.85,
+        283.76, 291.72, 284.73, 291.82, 296.74, 291.13)
+
+local last = rsi:last() -- returns last RSI value 54.17
+
+-- To return series of RSI:
+local series = rsi:series() -- 55.37, 50.07, 51.55, 50.20, 45.14, 50.48, 44.69, 47.47, 46.71, 47.45, 51.05, 56.29, 51.12, 55.58, 58.41, 54.17
+
+local SimpleMovingAverage = require "SimpleMovingAverage"
+
+local sma = SimpleMovingAverage(4)
+-- Possibly usage:
+ sma:add{4.0, 5.0, 6.0, 6.0, 6.0, 6.0, 2.0}:last() -- 5.0
+```
+
+## List of indicators
+
+So far there are the following indicators available.
+
+* Trend
+  * Exponential Moving Average (EMA)
+  * Simple Moving Average (SMA)
+* Oscillators
+  * Relative Strength Index (RSI)
+  * Fast Stochastic
+  * Slow Stochastic
+  * Moving Average Convergence Divergence (MACD)
+  * Percentage Price Oscillator (PPO)
+  * Money Flow Index (MFI)
+* Other
+  * Minimum
+  * Maximum
+  * True Range
+  * Standard Deviation (SD)
+  * Average True Range (AR)
+  * Efficiency Ratio (ER)
+  * Bollinger Bands (BB)
+  * Chandelier Exit (CE)
+  * Keltner Channel (KC)
+  * Rate of Change (ROC)
+  * On Balance Volume (OBV)
