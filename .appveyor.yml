@@ -66,6 +66,7 @@ build_script:
 
 before_test:
 # install test only deps (if not already installed)
+- luarocks show say || luarocks install say
 - luarocks show busted || luarocks install busted
 - luarocks show luacov || luarocks install luacov
 - luarocks show luacheck || luarocks install luacheck
