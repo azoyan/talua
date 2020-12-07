@@ -1,4 +1,4 @@
-# talua - Technical Analysys Lua library
+# talua
 This library provide most popular technical indicators.
 
 ## Getting started
