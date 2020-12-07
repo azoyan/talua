@@ -11,7 +11,10 @@ Techincal Analysis library written in Lua
 Provides most popular technical indicators.
 
 ## Getting started
-
+### Install from luarocks
+```sh
+luarocks install --server=https://luarocks.org/dev talua
+```
 
 ## Basic ideas
 
