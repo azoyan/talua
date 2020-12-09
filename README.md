@@ -1,4 +1,4 @@
-![logo](https://i.ibb.co/fHBfWv7/untitled-5.png)
+![logo](https://i.ibb.co/Xsr4jwQ/untitled-6-1.png)
 [![build status](https://github.com/azoyan/talua/workflows/CI/badge.svg)](https://github.com/azoyan/talua/actions?query=workflow%3ACI)
 [![Travis (.org)](https://img.shields.io/travis/azoyan/talua?logo=travis)](https://travis-ci.org/azoyan/talua)
 [![AppVeyor](https://img.shields.io/appveyor/build/azoyan/talua?logo=appveyor)](https://ci.appveyor.com/project/azoyan/talua)
