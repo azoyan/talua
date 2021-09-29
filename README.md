@@ -6,7 +6,7 @@
 [![codecov](https://codecov.io/gh/azoyan/talua/branch/main/graph/badge.svg?token=NP5G0OBNB3)](https://codecov.io/gh/azoyan/talua)
 [![License](https://img.shields.io/badge/License-MIT-brightgreen.svg)](LICENSE)
  
-Techincal Analysis library written in Lua
+Techincal Analysis and Indicators library written in Lua
 
 Provides most popular technical indicators.
 
