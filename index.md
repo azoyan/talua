@@ -15,7 +15,7 @@ Common to the whole API are the functions `add`, `last`, `series` and `reset`.
 The add function is universal and can take a `number`, several numbers, or a table of numbers as arguments, as well as, in most cases, a candlestick (`Candlestick`), several candlesticks, and a table of candlesticks. 
 
 The function returns the `self`, so you can call it multiple times or call another method of the object. Take a look:
-```Lua
+```lua
 local SimpleMovingAverage = require "SimpleMovingAverage"
 
 local sma = SimpleMovingAverage(4)
