@@ -1,5 +1,5 @@
 package = "talua"
-version = "dev-1"
+version = "1.0.1-1"
 source = {
    url = "git+https://github.com/azoyan/talua.git",
    branch = "main"
