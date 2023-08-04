@@ -43,7 +43,6 @@ local calculate = function(self, input)
         self.negative_money_flow[#self.negative_money_flow + 1] = money_flow
         self.positive_money_flow[#self.positive_money_flow + 1] = 0
     end
-    self.typical_price[self.typical_price] = typical_price
 
     if #self.money_flows >= self.period then
         if #self.positive_money_flow > self.period then
